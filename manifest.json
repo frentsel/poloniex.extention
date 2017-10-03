@@ -1,0 +1,43 @@
+{
+  "browser_action": {
+    "default_icon": "res/logo16.png",
+    "default_popup": "popup/popup.html"
+  },
+  "content_scripts": [
+    {
+      "css": [
+        "styles.css"
+      ],
+      "js": [
+        "libs/jquery-2.1.1.min.js",
+        "content.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "persistent": false,
+      "run_at": "document_end"
+    }
+  ],
+  "icons": {
+    "128": "res/logo128.png",
+    "48": "res/logo48.png",
+    "16": "res/logo16.png"
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsUdqiE4ff4tYOsGPe8J585iFUC2zJcviJNaLfAkEbfuAdMOBTxYjsnfhAu4XT5ucfPfkoD9PfBd+padw/YGw/iDzkUbMLpwyhhl9hvQe+wGYEOtnUUGh9+iCie7X14n5iJ51pInjF5x17ZOY+p9KCq0ft63cvLIm47VA0l1k3+kX44n5tMZijk1N0E0lk0CiNQTWN201DS4V0fxyrgzZQi1bqEI3o29TNlYgn6Slic+e+LSVZEa1gLAs67RLpEmYPjc+fvFUVO8qD+Im16HENTNUJy+eZ5bDgkabyzEQI7VruoqyYGZPpHCqiuKyqvtwV0bRYfhEUsQJAZql47sBlwIDAQAB",
+  "manifest_version": 2,
+  "name": "Poloniex",
+  "permissions": [
+    "activeTab",
+    "clipboardWrite",
+    "webRequest",
+    "webRequestBlocking",
+    "*://*/*",
+    "proxy",
+    "storage",
+    "tabs",
+    "<all_urls>"
+  ],
+  "version": "0.1"
+}
