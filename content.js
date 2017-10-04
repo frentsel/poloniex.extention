@@ -5,16 +5,19 @@ var loadScript = function (content) {
     document.head.appendChild(elem);
 };
 
-$(function () {
-
+var getFileContent = function (src, callback) {
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', chrome.extension.getURL('assets/main.js'), true);
+    xhr.open('GET', chrome.extension.getURL(src), true);
     xhr.onreadystatechange = function()
     {
         if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200)
         {
-            loadScript(xhr.response);
+            callback(xhr.response);
         }
     };
     xhr.send();
+};
+
+$(function () {
+    getFileContent('assets/main.js', loadScript);
 });

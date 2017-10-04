@@ -37,3 +37,31 @@
 	content: "›";
 	display: block;
 }
+
+.switchBuySellStopLimit {
+	cursor: pointer;
+	overflow: hidden;
+	display: flex;
+	float: none;
+	clear: both;
+	position: absolute;
+	font-size: 12px;
+	border: 1px solid #90abac;
+	width: 40px;
+	justify-content: center;
+	padding: 2px 0;
+	background: #f3f7f7;
+	transition: all .2s;
+}
+
+.switchBuySellStopLimit .hide {
+	display: none;
+}
+
+.switchBuySellStopLimit.active .hide {
+	display: block;
+}
+
+.switchBuySellStopLimit.active .show {
+	display: none;
+}
