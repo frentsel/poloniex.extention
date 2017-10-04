@@ -39,5 +39,8 @@
     "tabs",
     "<all_urls>"
   ],
+  "web_accessible_resources": [
+    "assets/*"
+  ],
   "version": "0.1"
 }

@@ -1,21 +1,20 @@
-var content = `$(function () {
-    if(!$('.bigChart:visible').length) return false;
-    $('.bigChart').append('<div class="sideArrow active"></div>');
-    $(document).on('click', '.sideArrow', function (e) {
-        $(this).toggleClass('active');
-        if ($(this).hasClass('active')) {
-            $('.side').show('slide', {direction: 'left'}, 100);
-            resizeCharts();
-        } else {
-            $('.side').hide('slide', {direction: 'right'}, 100);
-            setTimeout(function(){resizeCharts()}, 101);
-        }
-    });
-})`.replace("\n", '');
-
-$(function () {
+var loadScript = function (content) {
     var elem = document.createElement("script");
     elem.type = "text/javascript";
-    elem.innerHTML = content;
+    elem.innerHTML = content.replace(/[\n]+/gm, '');
     document.head.appendChild(elem);
+};
+
+$(function () {
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', chrome.extension.getURL('assets/main.js'), true);
+    xhr.onreadystatechange = function()
+    {
+        if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200)
+        {
+            loadScript(xhr.response);
+        }
+    };
+    xhr.send();
 });
