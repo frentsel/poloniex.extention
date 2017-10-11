@@ -13,7 +13,7 @@
 .sideArrow {
 	display: flex;
 	position: absolute;
-	right: -15px;
+	right: -10px;
 	left: inherit;
 	top: 0;
 	width: 15px;
@@ -24,8 +24,8 @@
 	background: #f7ab1c;
 	color: #000;
 	border: 1px solid #dc9103;
-	border-left: 0;
 	transition: all .2s;
+	z-index: 100;
 }
 
 .sideArrow:after {
@@ -36,6 +36,8 @@
 .sideArrow.active {
 	border-color: #90abac;
 	background: #b3d5d6;
+	right: -15px;
+	border-left: 0;
 	color: #1f2324;
 }
 
@@ -46,34 +48,34 @@
 
 .switchBuySellStopLimit {
 	cursor: pointer;
+	color: #000;
 	overflow: hidden;
 	display: flex;
 	float: none;
 	clear: both;
 	position: absolute;
 	font-size: 12px;
-	border: 1px solid #90abac;
+	border: 1px solid #dc9103;
 	width: 40px;
 	justify-content: center;
 	padding: 2px 0;
-	background: #f3f7f7;
+	background: #f7ab1c;
 	transition: all .2s;
 }
 
-.switchBuySellStopLimit .hide {
+.switchBuySellStopLimit .fa-chevron-up {
 	display: none;
 }
 
 .switchBuySellStopLimit.active {
-	background: #f7ab1c;
-	color: #000;
-	border-color: #dc9103;
+	background: #f3f7f7;
+	border-color: #90abac;
 }
 
-.switchBuySellStopLimit.active .hide {
+.switchBuySellStopLimit.active .fa-chevron-up {
 	display: block;
 }
 
-.switchBuySellStopLimit.active .show {
+.switchBuySellStopLimit.active .fa-chevron-down {
 	display: none;
 }

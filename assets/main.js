@@ -1,54 +1,84 @@
-var switchBuySellStopLimit =
-    `<div class="switchBuySellStopLimit" title="Show or Hide Buy, Sell and Stop-Limit blocks" onclick="toggleBuySellStopLimit(this)">
-        <i class="fa fa-chevron-up show"></i>
-        <i class="fa fa-chevron-down hide"></i>
-    </div>`.replace("\n", '');
+var bigChart = {
+    setStatus: function (status) {
 
-var toggleBigChart = function (_obj) {
+        $('.sideArrow').toggleClass('active', status);
 
-    var obj = _obj || $('.sideArrow')[0];
+        localStorage['bigChartStatus'] = status ? 'short' : 'full';
 
-    $(obj).toggleClass('active');
+        if (status) {
+            $('.side').show('slide', {direction: 'left'}, 100);
+            resizeCharts();
+        } else {
+            $('.side').hide('slide', {direction: 'right'}, 100);
+            setTimeout(resizeCharts, 101);
+        }
+    },
+    toggle: function () {
+        this.setStatus(localStorage['bigChartStatus'] === 'full');
+    },
+    init: function () {
 
-    if ($(obj).hasClass('active')) {
-        $('.side').show('slide', {direction: 'left'}, 100);
-        resizeCharts();
-    } else {
-        $('.side').hide('slide', {direction: 'right'}, 100);
-        setTimeout(resizeCharts, 101);
-    }
+        if (!$('.bigChart:visible').length)
+            return false;
+
+        $('.bigChart')
+            .append(`<div class="sideArrow active" title="Full Width" onclick="bigChart.toggle()"></div>`);
+
+        if(localStorage['bigChartStatus'] === 'full') {
+            this.setStatus(false);
+        }
+    },
 };
 
-var toggleBuySellStopLimit = function (_obj) {
+var buySellStopLimit = {
+    setStatus: function (status) {
 
-    var obj = _obj || $('.switchBuySellStopLimit')[0];
+        $('.switchBuySellStopLimit').toggleClass('active', status);
 
-    $(obj)
-        .closest('.switchBuySellStopLimit')
-        .toggleClass('active');
+        localStorage['buySellStopLimit'] = status ? 'short' : 'full';
 
-    $('.cols').slideToggle(150);
+        if (status) {
+            $('.cols').slideDown(150);
+        } else {
+            $('.cols').slideUp(150);
+        }
+    },
+    toggle: function () {
+        this.setStatus(localStorage['buySellStopLimit'] === 'full');
+    },
+    init: function () {
+
+        if (!$('.bigChart:visible').length)
+            return false;
+
+        let content =
+            `<div class="switchBuySellStopLimit active" title="Show or Hide Buy, Sell and Stop-Limit blocks" onclick="buySellStopLimit.toggle()">
+                <i class="fa fa-chevron-up"></i>
+                <i class="fa fa-chevron-down"></i>
+            </div>`.replace("\n", '');
+
+        $('.bigChart').append(content);
+
+        if(localStorage['buySellStopLimit'] && localStorage['buySellStopLimit'] === 'full') {
+            this.setStatus(false);
+        }
+    },
 };
 
 $(document).on('keyup', function (e) {
 
     // Toggle Big Chart
     if (e.altKey && (e.keyCode === 90)) {
-        toggleBigChart();
+        bigChart.toggle();
     }
 
     // Toggle Buy-Sell blocks
     if (e.altKey && (e.keyCode === 88)) {
-        toggleBuySellStopLimit();
+        buySellStopLimit.toggle();
     }
 });
 
 $(function () {
-
-    if (!$('.bigChart:visible').length)
-        return false;
-
-    $('.bigChart')
-        .append('<div class="sideArrow active" title="Full Width" onclick="toggleBigChart(this)"></div>')
-        .append(switchBuySellStopLimit);
+    bigChart.init();
+    buySellStopLimit.init();
 });
